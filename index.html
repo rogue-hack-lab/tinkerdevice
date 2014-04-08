@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<body bgcolor="#000000">
+	<head>
+	<meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=yes" />
+		
+  		
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+		<style>
+			body{
+				font-family: 'Unibody8ProRegular', Arial, Helvetica, sans-serif;
+				font-weight: lighter;
+				color: #FF5D00;
+				font-size: 12px;
+				text-align:center;
+			}
+			#title{
+				font-size:4.5em;
+			}
+			#main{
+				width: 900px;
+				Height: 900px;
+				display:block;
+				position:relative;
+				margin-left:auto;
+				margin-right:auto;
+				width: 75%;
+				max-width:600px;
+				
+			
+			}
+			
+			
+			
+			.playblocks{
+				width: 13%;
+				height: 13%;
+				background-color: #222222;
+				float:left;
+				display:inline;
+				position:relative;
+				margin-left:.52%;
+				margin-right:.52%;
+				margin-top:.87%;
+				margin-bottom:.87%;
+				cursor:pointer;
+				
+			}
+			
+			.active{
+				background-color: #FF5D00;
+			}
+			
+			@font-face {
+				font-family: 'Unibody8ProRegular';
+				src: url('webfonts/unibody8pro-regular.eot');
+				src: url('webfonts/unibody8pro-regular.eot') format('embedded-opentype'),
+					 url('webfonts/unibody8pro-regular.woff') format('woff'),
+					 url('webfonts/unibody8pro-regular.ttf') format('truetype'),
+					 url('webfonts/unibody8pro-regular.svg#Unibody8ProRegular') format('svg');
+			}
+
+			
+			.btn-block{
+				color=#DDDDDD;
+				
+			}
+			
+			#buttons{
+				clear:both;
+				display:block;
+				position:relative; 
+				top: 15px;
+				margin-left:auto;
+				margin-right:auto;
+				width:900px;
+				height:64px;
+			}
+			
+			.UIbutton{
+				cursor:pointer;
+				/*border: 2px solid #11378F;*/
+				width:45%;
+				position:relative;
+				font-size:1.4em;
+			
+			}
+			/*
+			.UIbutton:active{
+				background-color: #B2B2B2;
+			}
+			*/
+			
+			#refreshbutton{
+				margin-left:auto;
+				margin-right:auto;
+				float:left;
+				
+			}
+			
+			#backbutton{
+				margin-left:auto;
+				margin-right:auto;
+				
+				
+			}
+			
+			#togglebutton{
+				margin-left:auto;
+				margin-right:auto;
+				float:right;
+			}
+			.UIText{
+				display: block;
+			}
+			
+			#shade{
+				width: 100%;
+				height: 100%;
+				background-color:#222;
+				opacity:.8;
+				position:fixed;
+				top:0px;
+				left:0px;
+			}
+			
+			.shadeDown{
+				display:none;
+			}
+			
+			.shadeUp{
+				display:block;
+			}
+			
+			#videoplayer{
+				position:relative;
+				width:100%;
+				height:600px;
+				margin-left:auto;
+				margin-right:auto;
+				top:-658px;
+				z-index:500;
+
+			}
+
+			
+			.showvid{
+				display:block;
+
+			}
+			
+			.hidevid{
+				display:none;
+			}
+			
+			.closewin{
+				position:relative;
+				font-size: 2em;
+				top:0px;
+				margin-right:10px;
+				cursor:pointer;
+				float:right;
+				
+				
+			
+			}
+			
+			#congrats{
+				font-size:2em;
+				font-family: Helvetica, Arial, sans-serif;
+				position: relative;
+				top:8px;
+				float:left;
+				font-weight: bold;
+			}
+			
+			/*iPad*/
+			
+			@media(max-width: 768px){
+				#title{
+					font-size:4.5em;
+				}
+			
+			}
+			
+			/*mobile*/
+			
+			@media(max-width: 640px){
+			 	body{
+			 		font-size: 10px;
+			 	}
+			 
+			 	.UIbutton{
+			  		width:64px;
+					height:64px;
+			 	}
+			 	#refreshbutton{
+					position:relative;
+					background-image: url("images/arrow_circle_right.png");
+					
+				}
+			 	.UIText{
+					display: none;
+				}
+				
+				#main{
+					width:95%;
+				}
+				#title{
+					font-size: 4em;
+				}
+				/*
+				#videoplayer{
+					height:550px;
+				}
+				.closewin{
+					position:relative;
+					font-size: 2em;
+					top:30px;
+				}*/
+
+			}
+			
+		</style>
+		<script>
+		$(document).ready(function() {
+  			$('#main').height($('#main').width());
+  			$('#buttons').width($('#main').width());
+  			//add more resizing logic in here if you need to
+		});
+		$(window).resize(function() {
+  			$('#main').height($('#main').width());
+  			$('#buttons').width($('#main').width());
+   			 //add more resizing logic in here if you need to
+
+		});
+		/*
+			window.addEventListener("resize", function(e) {
+    			var mainElement = document.getElementById('main');
+    			console.log("you're resizing!");
+    			mainElement.style.height = mainElement.style.width;
+    			console.log(mainElement.style.width);
+			});
+		*/
+		
+			var answerkey = [
+				{
+					nickname: "godzilla", 
+					hash: [false, false, false, true, true, true, false, false, false, true, true, false, true, false, false, false, true, true, true, true, true, false, true, true, true, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, false, false, true, true, true, true, false, false, false],
+					result: function(){playvideo('http://www.youtube.com/embed/C571dOz4b0E', this.message)},
+					message: "Mutant Toys!",
+				},
+				{
+					nickname: "logo", 
+					hash: [false, false, false, true, false, false, false, false, false, true, true, false, false, false, false, true, true, false, true, false, false, false, true, true, true, false, false, false, false, true, true, false, true, false, false, false, false, true, true, false, false, false, false, false, false, true, false, false, false],
+					result: function(){console.log('default pattern set')},
+					message: "",					
+				},
+				{
+					nickname: "music", 
+					hash: [false, false, false, true, false, false, false, false, false, false, true, true, false, false, false, false, false, true, false, true, false, false, true, true, true, false, false, false, false, true, true, true, false, false, false, false, true, true, true, false, false, false, false, false, false, false, false, false, false],
+					result: function(){playvideo('http://www.youtube.com/embed/C571dOz4b0E', this.message)},		
+					message: "Congratulations! Here's the Rogue Hack Lab 8-bit Theme!",
+				},
+				{
+					nickname: "people power", 
+					hash: [false, false, true, true, true, false, false, false, false, true, false, true, false, false, true, false, true, true, true, false, true, true, false, false, true, false, false, true, true, true, true, true, true, true, true, false, false, true, true, true, false, false, false, false, true, true, true, false, false],
+					result: function(){playvideo('http://www.youtube.com/embed/C571dOz4b0E', this.message)},		
+					message: "People Power!",
+				},
+			];
+		
+			var myfirstvariable = 25;	
+			//create an array of true false values that you'll be checking the state of things with
+			var currentHash;
+			$(document).ready(function(){
+				currentHash = hashMaker();
+			
+			});
+			
+			//hashMaker();
+			/*
+			for(i=0;i<49;i++){
+				//console.log("hello kyle"+i);
+				currentHash[i] = (false);
+		
+			}*/
+			
+			
+			//set a pattern to a particular nickname
+			function setPattern(hashNick){
+				//clearBlocks();
+				var thisone = _.findWhere(answerkey, {nickname: hashNick});
+				console.log(thisone);
+				if(!_.isUndefined(thisone)){
+					currentHash = thisone.hash;
+					var count = 0;
+					_.each(currentHash, function(q){
+						var blockname = "#block" + count;
+						//console.log(blockname);
+						if(q){
+							$(blockname).addClass('active');
+						}else{
+							$(blockname).removeClass('active');
+						}
+						count++; 
+					});
+					thisone.result();
+				}
+			}
+			
+			/*
+			function refreshBlocks(){
+				//set the visuals
+				
+				//set the hash
+				currentHash = [false, false, false, true, false, false, false, false,
+				 false, true, true, false, false, false, false, true, true, false, true, false, false,
+				  false, true, true, true, false, false, false, false, true, true, false, true, false, 
+				  false, false, false, true, true, false, false, false, false, false, false, true, 
+				  false, false, false];
+				
+				var count = 0;
+				_.each(currentHash, function(q){
+					var blockname = "#block" + count;
+					//console.log(blockname);
+					if(q){
+						$(blockname).addClass('active');
+					}else{
+						$(blockname).removeClass('active');
+					}
+					count++; 
+				});
+				
+			}
+			*/
+			
+			function goBack(){
+  					window.history.back()
+  				}
+			
+			//to recall a value from this array use its respective index
+			//for example currentHash[2]
+			//theoretically this would return the value "true"
+			function onoff(theblock)
+				{
+					//alert("you clicked a block" + theblock.id);
+					$(theblock).toggleClass('active');
+					
+					//alter the hash
+						//get the name of the block
+					var data = window.bname = theblock.id;
+							//console.log(bname);
+					var res = bname.split("k");
+							//console.log(res[1]);
+						//turn block name into an integer
+							//parsing the string into an integer
+							//consider working with the split function
+							//i.e. - bname.split();
+							//use string functions
+			//var res = bname.split(1)
+		
+						
+						
+						//change the array value to true/false based on the integer
+							//check the value
+				//console.log(currentHash[res[1]]);
+				
+				//if the value is true, change to false
+				//if the value is false then change to true
+				if (currentHash[res[1]]==true){
+					currentHash[res[1]]=false;
+				
+				}
+				
+				else{
+					currentHash[res[1]]=true;
+				
+				}
+							
+				//check to see if the hash matches from your JSON object
+				
+				//_.each(answerkey,function(q){
+				
+					//alert(q.hash);
+					
+				//})
+				
+				_.each(answerkey, function(q){
+					var isMatch = true;
+					var count = 0;
+				 	_.each(q.hash, function(z){
+				 			if(z!=currentHash[count]){
+				 				isMatch = false;
+				 			}else{
+				 				//isMatch = true;
+				 			}
+				 			count++;
+				 		
+				 			
+				 		});
+				 		if(isMatch){
+				 			q.result(); 
+				 		}
+				 	}
+				 
+				
+				); 	
+					//http://underscorejs.org/#arrays
+					
+				// code above this line
+				/*
+				this is a comment
+				it is multi-line
+				this is the only way to comment something in css
+				both ways work in javascript though
+				*/
+				}
+				function hashMaker(){
+					var arr = [];
+					for(i=0; i<49; i++){
+					 if($("#block" + i).hasClass("active")){
+					 	arr[i] = true;
+					 }else{
+					 	arr[i]=false;
+					 }
+					}
+					return arr;
+					
+				}
+				
+				function playvideo(url, msg){
+					
+					//pass video url
+					//make video window visible
+					$("#videoplayer").toggleClass("hidevid");
+					//close window if you click outside box
+					
+					//set the src attribute for the vidplayer to reflect the supplied video
+					$('#vidframe').attr('src', url);
+					$('#congrats').html(msg);
+					$('#shade').toggleClass('shadeUp');
+					
+				}
+				
+				function clearBlocks(){
+					var count = 0;
+					_.each($('.playblocks'), function(q){
+						//console.log($(q).hasClass('active'));
+						$(q).removeClass('active');
+						currentHash[count] = false;
+						count++;
+					});
+				}
+				
+				
+				function closePopUp(){
+					$('#videoplayer').toggleClass('hidevid');
+					$('#vidframe').attr('src', '');
+					$('#shade').toggleClass('shadeUp');
+				}
+		</script>
+	</head>
+	<body>
+		<div id="overall">
+			<div id="main">
+				<div id="title" class="header">
+					TINKER DEVICE
+					
+				</div>
+				<div id="block0" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block1" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block2" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block3" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block4" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block5" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block6" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block7" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block8" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block9" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block10" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block11" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block12" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block13" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block14" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block15" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block16" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block17" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block18" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block19" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block20" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block21" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block22" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block23" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block24" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block25" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block26" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block27" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block28" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block29" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block30" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block31" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block32" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block33" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block34" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block35" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block36" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block37" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block38" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block39" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block40" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block41" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block42" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block43" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block44" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block45" class="playblocks active" onclick="onoff(this)">
+					
+				</div>
+				<div id="block46" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block47" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+				<div id="block48" class="playblocks" onclick="onoff(this)">
+					
+				</div>
+		
+			</div>
+			
+			<div id="buttons">	
+				<div id="refreshbutton" class="UIbutton" onclick="setPattern('logo')">
+						<span class="UIText">RESET</span>
+				</div>
+				<!--
+				<div id="backbutton" class="UIbutton" onclick="goBack()">
+						<span class="UIText">BACK</span>
+				</div>-->
+				<!--
+				<div id="togglebutton" class="UIbutton" onclick="onoff(this)">
+						<span class="UIText">TOGGLE</span>
+				</div>-->
+			</div>	
+			
+			<div id="videoplayer" class="hidevid">
+				<span class="closewin" onclick="closePopUp()">CLOSE</span>
+				<span id="congrats"></span>
+				<iframe  id="vidframe" src="" width="100%" height="100%" seamless></iframe>
+			</div>
+		
+		
+		</div>
+		<div id="shade" class="shadeDown"> </div>
+		
+	</body>
+</html>
