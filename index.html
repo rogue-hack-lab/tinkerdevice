@@ -41,7 +41,7 @@
 			.playblocks{
 				width: 13%;
 				height: 13%;
-				background-color: #222222;
+				background-color: #444;
 				float:left;
 				display:inline;
 				position:relative;
@@ -182,12 +182,15 @@
 				width:100%;
 			}
 			
-			#goicon{
+			#rewholder{
 				position:relative;
 				margin-left:auto;
 				margin-right:auto;
 				top:150px;
+				display:block;
 			}
+			
+			
 			
 			/*iPad*/
 			
@@ -233,8 +236,31 @@
 					font-size: 2em;
 					top:30px;
 				}*/
+				
+				#congrats{
+					top:30px;
+				
+				}
+				
+				#rewholder{
+					top: 40px;
+				}
+			}
+			/*legacy mobile */
+			@media(max-width: 480px){
+				#title{
+					font-size: 3.6em;
+				}
 
 			}
+			/*legacy mobile */
+			@media(max-width: 320px){
+				#title{
+					font-size: 2.5em;
+				}
+
+			}
+
 			
 		</style>
 		<script>
@@ -300,7 +326,7 @@
 					nickname: "Prof. Jones - 005", 
 					hash: [true, true, true, false, true, true, true, true, false, true, true, true, false, true, true, true, true, false, true, true, true, false, false, false, true, false, false, false, false, false, false, true, false, false, false, true, false, false, false, false, false, true, true, true, true, true, true, true, true],
 					result: function(){givereward('http://youtu.be/bFMuvM03ePo', this.message)},		
-					message: "Prof Jones invites you to the practicum table in Artists' Alley to show you the ways that our EMDA students are connecting to the real world and the community through our newest partner: <strong>Rogue Hack Lab</strong>.",
+					message: "Prof Jones invites you to the practicum table in Artist's Alley to show you the ways that our EMDA students are connecting to the real world and the community through our newest partner: <strong>Rogue Hack Lab</strong>.",
 				},
 			];
 		
@@ -452,9 +478,11 @@
 			<div id="reward" class="hiderew">
 				<span class="closewin" onclick="closePopUp()">CLOSE</span>
 				<span id="congrats"></span>
-				<a id="rewlink" href="#" border="0" target="_blank">
-					<img id="goicon" src="images/goicon.png">
-				</a>
+				<span id="rewholder">
+					<a id="rewlink" href="#" border="0" target="_blank">
+						<img id="goicon" src="images/goicon.png">
+					</a>
+				</span>
 				<!--<iframe  id="vidframe" src="" width="100%" height="100%" seamless></iframe>-->
 			</div>
 		
