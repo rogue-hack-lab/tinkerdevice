@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	<meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=yes" />
+		
+  		<script type="text/template" id="blocktemp">
+			<div id="block<%= count %>" class="playblocks" onclick="onoff(this)">
+					
+			</div>
+		
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+		<script src="tinkerdevice/js/keys.js"></script>
+		<script src="tinkerdevice/js/td_core.js"></script>
+		<link rel="stylesheet" href="tinkerdevice/css/style.css" type="text/css" />
+		
+	</head>
+	<body class="minitile">
+		<div id="overall">
+			<div id="main">
+				<div id="title" class="header">
+					TINKER DEVICE
+				</div>
+		
+			</div>
+			
+			<div id="buttons">	
+				<div id="refreshbutton" class="UIbutton" onclick="clearBlocks()">
+						<span class="UIText">CLEAR</span>
+				</div>
+				<!--
+				<div id="backbutton" class="UIbutton" onclick="goBack()">
+						<span class="UIText">BACK</span>
+				</div>-->
+				<!--
+				<div id="togglebutton" class="UIbutton" onclick="onoff(this)">
+						<span class="UIText">TOGGLE</span>
+				</div>-->
+			</div>	
+			
+			<div id="reward" class="hiderew">
+				<span class="closewin" onclick="closePopUp()">CLOSE</span>
+				<span id="congrats"></span>
+				<span id="rewholder">
+					<a id="rewlink" href="#" border="0" target="_blank">
+						<img id="goicon" src="tinkerdevice/images/goicon.png">
+					</a>
+				</span>
+				<!--<iframe  id="vidframe" src="" width="100%" height="100%" seamless></iframe>-->
+			</div>
+		
+		
+		</div>
+		<div id="shade" class="shadeDown"> </div>
+		
+	</body>
+</html>

@@ -1,0 +1,13 @@
+24 Apr 03:32:25 - [33m[nodemon] v1.0.17[39m
+24 Apr 03:32:25 - [33m[nodemon] to restart at any time, enter `rs`[39m
+24 Apr 03:32:25 - [33m[nodemon] watching: *.*[39m
+24 Apr 03:32:25 - [32m[nodemon] starting `node server.js`[39m
+exception in nodemon killing node
+Error: EBADF, read
+
+If appropriate, please file an error: http://github.com/remy/nodemon/issues/new
+
+
+> tinkerdevice@0.0.1 start /home/dev/tinkerdevice
+> node server.js
+

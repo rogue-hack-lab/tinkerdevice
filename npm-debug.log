@@ -1,0 +1,23 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'uninstall', 'nodemon', '-g' ]
+2 info using npm@1.4.7
+3 info using node@v0.10.26
+4 verbose node symlink /usr/bin/node
+5 info /usr/lib/node_modules/nodemon unbuild
+6 info preuninstall nodemon@1.0.17
+7 info uninstall nodemon@1.0.17
+8 verbose true,/usr/lib/node_modules,/usr/lib/node_modules unbuild nodemon@1.0.17
+9 verbose /usr/bin,[object Object] binRoot
+10 error Error: EACCES, unlink '/usr/bin/nodemon'
+10 error  { [Error: EACCES, unlink '/usr/bin/nodemon'] errno: 3, code: 'EACCES', path: '/usr/bin/nodemon' }
+11 error Please try running this command again as root/Administrator.
+12 error System Linux 3.8.0-29-generic
+13 error command "node" "/usr/bin/npm" "uninstall" "nodemon" "-g"
+14 error cwd /home/dev/tinkerdevice
+15 error node -v v0.10.26
+16 error npm -v 1.4.7
+17 error path /usr/bin/nodemon
+18 error code EACCES
+19 error errno 3
+20 error stack Error: EACCES, unlink '/usr/bin/nodemon'
+21 verbose exit [ 3, true ]

@@ -1,0 +1,253 @@
+			.minitile {
+				background-image:url('../images/minitile.jpg');
+				background-repeat: repeat;
+				background-color:#000000;
+				}
+			
+			body{
+				font-family: 'Unibody8ProRegular', Arial, Helvetica, sans-serif;
+				font-weight: lighter;
+				color: #FF5D00;
+				font-size: 12px;
+				text-align:center;
+			}
+			#title{
+				font-size:4.5em;
+			}
+			#main{
+				width: 900px;
+				Height: 900px;
+				display:block;
+				position:relative;
+				margin-left:auto;
+				margin-right:auto;
+				width: 75%;
+				max-width:600px;
+				
+			
+			}
+			
+			
+			
+			.playblocks{
+				width: 13%;
+				height: 13%;
+				background-color: #444;
+				float:left;
+				display:inline;
+				position:relative;
+				margin-left:.52%;
+				margin-right:.52%;
+				margin-top:.87%;
+				margin-bottom:.87%;
+				cursor:pointer;
+				
+			}
+			
+			.active{
+				background-color: #FF5D00;
+			}
+			
+			@font-face {
+				font-family: 'Unibody8ProRegular';
+				src: url('webfonts/unibody8pro-regular.eot');
+				src: url('webfonts/unibody8pro-regular.eot') format('embedded-opentype'),
+					 url('webfonts/unibody8pro-regular.woff') format('woff'),
+					 url('webfonts/unibody8pro-regular.ttf') format('truetype'),
+					 url('webfonts/unibody8pro-regular.svg#Unibody8ProRegular') format('svg');
+			}
+
+			
+			.btn-block{
+				color=#DDDDDD;
+				
+			}
+			
+			#buttons{
+				clear:both;
+				display:block;
+				position:relative; 
+				top: 15px;
+				margin-left:auto;
+				margin-right:auto;
+				width:900px;
+				height:64px;
+			}
+			
+			.UIbutton{
+				cursor:pointer;
+				/*border: 2px solid #11378F;*/
+				width:45%;
+				position:relative;
+				font-size:1.4em;
+			
+			}
+			/*
+			.UIbutton:active{
+				background-color: #B2B2B2;
+			}
+			*/
+			
+			#refreshbutton{
+				margin-left:auto;
+				margin-right:auto;
+				float:left;
+				
+			}
+			
+			#backbutton{
+				margin-left:auto;
+				margin-right:auto;
+				
+				
+			}
+			
+			#togglebutton{
+				margin-left:auto;
+				margin-right:auto;
+				float:right;
+			}
+			.UIText{
+				display: block;
+			}
+			
+			#shade{
+				width: 100%;
+				height: 100%;
+				background-color:#222;
+				opacity:.95;
+				position:fixed;
+				top:0px;
+				left:0px;
+			}
+			
+			.shadeDown{
+				display:none;
+			}
+			
+			.shadeUp{
+				display:block;
+			}
+			
+			#reward{
+				position:fixed;
+				width:90%;
+				height:600px;
+				margin-left:auto;
+				margin-right:auto;
+				top:0px;
+				z-index:500;
+
+			}
+
+			
+			.showrew{
+				display:block;
+
+			}
+			
+			.hiderew{
+				display:none;
+			}
+			
+			.closewin{
+				position:relative;
+				font-size: 2em;
+				top:0px;
+				margin-right:10px;
+				cursor:pointer;
+				float:right;
+				
+				
+			
+			}
+			
+			#congrats{
+				font-size:2em;
+				font-family: Helvetica, Arial, sans-serif;
+				position: relative;
+				top:120px;
+				float:left;
+				font-weight: bold;
+				display:block;
+				width:100%;
+			}
+			
+			#rewholder{
+				position:relative;
+				margin-left:auto;
+				margin-right:auto;
+				top:150px;
+				display:block;
+			}
+			
+			
+			
+			/*iPad*/
+			
+			@media(max-width: 768px){
+				#title{
+					font-size:4.5em;
+				}
+			
+			}
+			
+			/*mobile*/
+			
+			@media(max-width: 640px){
+			 	body{
+			 		font-size: 10px;
+			 	}
+			 
+			 	.UIbutton{
+			  		width:64px;
+					height:64px;
+			 	}
+			 	#refreshbutton{
+					position:relative;
+					background-image: url("tinkerdevice/images/arrow_circle_right.png");
+					
+				}
+			 	.UIText{
+					display: none;
+				}
+				
+				#main{
+					width:95%;
+				}
+				#title{
+					font-size: 4em;
+				}
+				/*
+				#reward{
+					height:550px;
+				}
+				.closewin{
+					position:relative;
+					font-size: 2em;
+					top:30px;
+				}*/
+				
+				#congrats{
+					top:30px;
+				
+				}
+				
+				#rewholder{
+					top: 40px;
+				}
+			}
+			/*legacy mobile */
+			@media(max-width: 480px){
+				#title{
+					font-size: 3.6em;
+				}
+
+			}
+			/*legacy mobile */
+			@media(max-width: 320px){
+				#title{
+					font-size: 2.5em;
+				}
+
+			}
